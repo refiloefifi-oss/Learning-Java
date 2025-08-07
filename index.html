@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta charset="UTF-8" />
+        <title>Title</title>
+    </head>
+    <body>
+        <h1 id="heading1"></h1>
+        <p id="paragraph1"></p>
+        <p id="paragraph2"></p>
+        <p id="paragraph3"></p>
+        <p id="paragraph4"></p>
+        <p id="paragraph5"></p>
+        
+        <script>
+            var text1;
+            var text2;
+            var text3;
+            var numA = 8;
+            var numB = 7;
+            
+            text1 = "I want to be a Software Engineer."
+            text2 = "Javacript is fun."
+            text3 = " Learning is fun."
+            
+            document.getElementById("heading1").innerHTML = (text1);
+            document.getElementById("paragraph1").innerHTML = (text2 + text3);
+            document.getElementById("paragraph2").innerHTML = (numA);
+            
+            document.getElementById("paragraph3").innerHTML = (numA + " - " + numB + " = " + (numA - numB));
+            document.getElementById("paragraph4").innerHTML = ("The answer is: " + numA * numB);
+            document.getElementById("paragraph5").innerHTML = (numA + " X " + numB + " = " + numA * numB);
+        </script>
+    </body>
+</html>

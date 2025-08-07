@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta charset="UTF-8" />
+        <title>Title</title>
+    </head>
+    <body>
+        <div class="calculator-page">
+        <table border="1">
+            <tbody>
+                <tr>
+                    <td colspan="4">
+                        <input type="text" id="inputBox" value="0">
+                    </td>
+                </tr>
+                <!-- Advanced functions -->
+                <tr>
+                    <td onclick="calculateSin()">sin</td>
+                    <td onclick="calculateCos()">cos</td>
+                    <td onclick="calculateTan()">tan</td>
+                    <td onclick="insertPi()">π</td>
+                </tr>
+                <tr>
+                    <td onclick="calculateSqrt()">√</td>
+                    <td onclick="calculateSquare()">x^2</td>
+                    <td onclick="calculateLog()">log</td>
+                    <td onclick="insertE()">e</td>
+                </tr>
+                <!-- Brackets and backspace -->
+                <tr>
+                    <td onclick="insertText('(')">(</td>
+                    <td onclick="insertText(')')">)</td>
+                    <td onclick="backspacePressed()">←</td>
+                    <td onclick="btnACPressed()">AC</td>
+                </tr>
+                <!-- Numbers and operators -->
+                <tr>
+                    <td onclick="digitBtnPressed(7)">7</td>
+                    <td onclick="digitBtnPressed(8)">8</td>
+                    <td onclick="digitBtnPressed(9)">9</td>
+                    <td onclick="operatorBtnPressed('x')">x</td>
+                </tr>
+                <tr>
+                    <td onclick="digitBtnPressed(4)">4</td>
+                    <td onclick="digitBtnPressed(5)">5</td>
+                    <td onclick="digitBtnPressed(6)">6</td>
+                    <td onclick="operatorBtnPressed('-')">-</td>
+                </tr>
+                <tr>
+                    <td onclick="digitBtnPressed(1)">1</td>
+                    <td onclick="digitBtnPressed(2)">2</td>
+                    <td onclick="digitBtnPressed(3)">3</td>
+                    <td onclick="operatorBtnPressed('+')">+</td>
+                </tr>
+                <tr>
+                    <td onclick="digitBtnPressed(0)" colspan="2">0</td>
+                    <td onclick="insertText('.')">.</td>
+                    <td onclick="operatorBtnPressed('/')">/</td>
+                </tr>
+                <tr>
+                    <td colspan="4" onclick="equalsBtnPressed()">=</td>
+                </tr>
+            </tbody>
+        </table>
+            <script>
+                var newLine = true;
+                var value1;
+                var currentOperator;
+                function digitBtnPressed(button){
+                    if(newLine == true){
+                        document.getElementById("inputBox").value = button;
+                        newLine = false;
+                    } else{
+                        var currentValue = document.getElementById("inputBox").value;
+                        document.getElementById("inputBox").value = currentValue + button;
+                    }
+                }
+                
+                function btnACPressed(){
+                    document.getElementById("inputBox").value = 0;
+                    newLine = true;
+                }
+                
+                function operatorBtnPressed(operator){
+                    currentOperator = operator;
+                    value1 = parseInt(document.getElementById("inputBox").value);
+                    newLine = true;
+                }
+                function equalsBtnPressed(){
+                    var value2 = parseInt(document.getElementById("inputBox").value);
+                    var finalTotal;
+                    
+                    switch (currentOperator){
+                        case "+":
+                            finalTotal = value1 + value2;
+                            break;
+                        case "-":
+                            finalTotal = value1 - value2;
+                            break;
+                        case "x":
+                            finalTotal = value1 * value2;
+                            break;
+                        case "/":
+                            finalTotal = value1 / value2;
+                            break;
+                    }
+                    
+                    document.getElementById("inputBox").value = finalTotal;
+                    value1 = 0;
+                    newLine = true;
+                }
+                
+                function backspacePressed(){
+                    let input = document.getElementById("inputBox");
+                    input.value = input.value.slice(0, -1);
+                    if (input.value === "") {
+                        input.value = "0";
+                        newLine = true;
+                    }
+                }
+                
+                function insertText(text){
+                    const input = document.getElementById("inputBox");
+                    if (newLine || input.value === "0") {
+                        input.value = text;
+                        newLine = false;
+                    } else {
+                        input.value += text;
+                    }
+                }
+                
+                
+                
+                
+                
+                function calculateSin() {
+                    const display = document.getElementById("inputBox");
+                    const angle = parseFloat(display.value);
+                    if (isNaN(angle)) return; // Prevent calculation if not a number
+                    const radians = angle * Math.PI / 180;
+                    const result = Math.sin(radians);
+                    display.value = result.toFixed(6); // Rounded to 6 decimal place
+                }
+                
+                function calculateCos() {
+                    const display = document.getElementById("inputBox");
+                    const angle = parseFloat(display.value);
+                    if (isNaN(angle)) return;
+                    const radians = angle * Math.PI / 180;
+                    const result = Math.cos(radians);
+                    display.value = result.toFixed(6);
+                }
+                function calculateTan() {
+                    const display = document.getElementById("inputBox");
+                    const angle = parseFloat(display.value);
+                    if (isNaN(angle)) return;
+                    const radians = angle * Math.PI / 180;
+                    const result = Math.tan(radians);
+                    display.value = result.toFixed(6);
+                }
+
+                function insertPi() {
+                    const input = document.getElementById("inputBox");
+                    input.value = Math.PI.toFixed(6);
+                    newLine = true;
+                }
+
+               
+                function calculateSqrt() {
+                    const display = document.getElementById("inputBox");
+                    const value = parseFloat(display.value);
+                    
+                    if (isNaN(value) || value < 0) {
+                        display.value = "Invalid input";
+                        newLine = true;
+                        return;
+                    }
+                    display.value = Math.sqrt(value).toFixed(6);
+                    newLine = true;
+                }
+                
+                
+                function calculateSquare() {
+                    const display = document.getElementById("inputBox");
+                    const value = parseFloat(display.value);
+                    
+                    if (isNaN(value)) {
+                        display.value = "Invalid input";
+                        newLine = true;
+                        return;
+                    }
+                    display.value = Math.pow(value, 2).toFixed(6);
+                    newLine = true;
+                }
+                
+                
+                function calculateLog() {
+                    const display = document.getElementById("inputBox");
+                    const value = parseFloat(display.value);
+                    
+                    if (isNaN(value) || value <= 0) {
+                        display.value = "Invalid input";
+                        newLine = true;
+                        return;
+                    }
+                    
+                    display.value = Math.log10(value).toFixed(6);
+                    newLine = true;
+                }
+                
+                function insertE() {
+                    const input = document.getElementById("inputBox");
+                    input.value = Math.E.toFixed(6); // 2.718281
+                    newLine = true;
+                }
+
+
+        </script>
+        </div>
+    </body>
+</html>

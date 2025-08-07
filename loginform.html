@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta charset="UTF-8" />
+        <title>Login/ Register</title>
+    </head>
+    <body>
+        <div class="header">
+            <form onsubmit="verifyUser(); return false;">
+            
+            <p>Welcome. Please log in.</p>
+            
+            
+            <label for="usernameInput">Username:</label><input type="text" id="usernameInput"><br/>
+            <label for="passwordInput">Password:</label><input type="password" id="passwordInput">
+            <p1 id="message"></p1>
+            <br/><br/>
+            <input type="submit" value="Log in">
+        </form>
+        
+        <script>
+           function verifyUser(){
+               var username= document.getElementById("usernameInput").value;
+               var password= document.getElementById("passwordInput").value;
+               
+               checkUserCreds(username,password);
+           }
+            function checkUserCreds(username,password){
+                var systemUsername = "Refiloe";
+                var systemPassword = "ref1LOE@2";
+                if (username == systemUsername && password == systemPassword){
+                    document.getElementById("message").innerHTML = ("Correct Password, Logging you in...")
+                } else {
+                    document.getElementById("message").innerHTML = ("Incorrect Password.")
+                }
+            }
+        </script>
+        </div>
+        
+    </body>
+</html>
